@@ -16,11 +16,39 @@
   height: 35px;
   margin-bottom: 20px;
   padding-left: 10px;
-  border: 1px solid teal;
-  color: teal;
+  border: 1px solid seagreen;
+  color: seagreen;
 }
 .form-button {
   height: 35px;
-  border: 1px solid teal;
+  border: 1px solid seagreen;
+  color: seagreen;
   cursor: pointer;
+}
+.error-p {
+  color: red;
+}
+.message-p {
+  color: green;
+  text-align: center;
+}
+.carousel-caption {
+  background-color: #0000007d;
+  border-radius: 10px;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: black;
+  border-radius: 5px;
+}
+.invalid-input {
+  color: red;
+  font-size: 12px;
+  margin-top: -20px;
+}
+.button-disabled {
+  cursor: not-allowed;
+}
+.max-width {
+  width: 100%;
 }

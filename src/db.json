@@ -1,3 +1,64 @@
 {
-  "seller": []
+  "seller": [
+    {
+      "name": "ander",
+      "password": "ander@ander",
+      "email": "1234",
+      "id": "1"
+    },
+    {
+      "name": "ander2",
+      "password": "ander@ander2",
+      "email": "1234",
+      "id": "2"
+    },
+    {
+      "id": "6a4b",
+      "name": "Anderson ",
+      "password": "1234",
+      "email": "anderson_raft@hotmail.com"
+    },
+    {
+      "id": "458b",
+      "name": "Ander",
+      "password": "123",
+      "email": "ander@ander"
+    },
+    {
+      "id": "a819",
+      "name": "teste1",
+      "password": "123",
+      "email": "teste@teste"
+    },
+    {
+      "id": "ed99",
+      "name": "teste2",
+      "password": "teste2",
+      "email": "teste2@teste2"
+    },
+    {
+      "id": "f641",
+      "name": "user4",
+      "password": "123",
+      "email": "123@123"
+    },
+    {
+      "id": "77bd",
+      "name": "Ander",
+      "password": "123",
+      "email": "ander@ander"
+    },
+    {
+      "id": "4240",
+      "name": "Anderson ",
+      "password": "123",
+      "email": "123@123"
+    },
+    {
+      "id": "8d9b",
+      "name": "Ander",
+      "password": "1234",
+      "email": "1234@1234"
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 <div class="seller-auth">
-  <div class="sign-up">
+  <div *ngIf="!showLogin" class="sign-up">
     <h1>Cadastrar Vendedor</h1>
     <form
       #sellerSignUp="ngForm"
@@ -28,6 +28,39 @@
         placeholder="Digite seu Email"
       />
       <button class="form-button">Cadastrar</button>
+      <a class="auth-toggle-link" (click)="openLogin()"
+        >Ja é Cadastrado? - Click aqui para Entrar</a
+      >
+    </form>
+  </div>
+
+  <div *ngIf="showLogin" class="login">
+    <h1>Login de Vendedor</h1>
+    <p class="error-p">{{ authError }}</p>
+    <form
+      #sellerLogin="ngForm"
+      (ngSubmit)="login(sellerLogin.value)"
+      class="comom-form"
+    >
+      <input
+        class="form-input"
+        type="text"
+        name="email"
+        placeholder="Digite seu Email"
+        ngModel
+      />
+      <input
+        class="form-input"
+        type="password"
+        ngModel
+        name="password"
+        placeholder="Digite sua Senha"
+      />
+
+      <button class="form-button">Login</button>
+      <a class="auth-toggle-link" (click)="openSignUp()"
+        >Ainda não é Cadastrado? - Click aqui para Cadastrar.</a
+      >
     </form>
   </div>
 </div>

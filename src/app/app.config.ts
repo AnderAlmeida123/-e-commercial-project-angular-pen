@@ -1,24 +1,39 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes'; // Supondo que você tenha um arquivo de rotas
+import { routes } from './app.routes'; // Arquivo que contém as rotas da aplicação
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
-// Importando os componentes que serão utilizados diretamente
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { SellerAuthComponent } from './seller-auth/seller-auth.component';
-import { FormsModule } from '@angular/forms'; // Para incluir o FormsModule
-
+/**
+ * `appConfig` é a configuração global da aplicação Angular.
+ * Aqui definimos os "providers", que são serviços e módulos globais usados no projeto.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
-    // Fornecendo as rotas e funcionalidades de hidratação do cliente
+    /**
+     * `provideRouter(routes)`: Configura o roteamento da aplicação.
+     * - `routes` é um array com as definições de caminhos e componentes associados.
+     */
     provideRouter(routes),
+
+    /**
+     * `provideClientHydration()`: Ativa a reidratação do lado do cliente.
+     * - Isso é útil para aplicações que usam Server-Side Rendering (SSR).
+     */
     provideClientHydration(),
-    FormsModule, // Aqui você adiciona o FormsModule se necessário
-    { provide: AppComponent, useClass: AppComponent },
-    { provide: HeaderComponent, useClass: HeaderComponent },
-    { provide: HomeComponent, useClass: HomeComponent },
-    { provide: SellerAuthComponent, useClass: SellerAuthComponent },
+
+    /**
+     * `provideHttpClient(withFetch())`: Configura o serviço HTTP do Angular.
+     * - `withFetch()` permite que a aplicação use `fetch()` em vez de `XMLHttpRequest`,
+     *   melhorando o desempenho e a compatibilidade com SSR.
+     */
+    provideHttpClient(withFetch()),
+
+    /**
+     * `importProvidersFrom(FormsModule)`: Habilita o uso do `FormsModule` para formulários reativos.
+     * - Isso permite trabalhar com formulários no Angular sem precisar importar o módulo manualmente nos componentes.
+     */
+    importProvidersFrom(FormsModule),
   ],
 };

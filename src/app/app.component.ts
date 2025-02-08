@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,5 @@ import { HeaderComponent } from './header/header.component';
 })
 export class AppComponent {
   title = 'loja-projeto';
+  constructor(private seller: SellerService) {}
 }
