@@ -1,23 +1,91 @@
-<nav class="nav">
-  <h1>Loja Angular</h1>
+<!-- Barra de navegação principal -->
+<header>
+  <nav class="nav">
+    <!-- Título/logo da loja -->
+    <h1>
+      <a routerLink="/" class="text-decoration-none">
+        🖊️ Canetas Personalizadas
+      </a>
+    </h1>
 
-  <div class="nav-search">
-    <input type="text" placeholder="Pesquisar Produtos" />
-    <button>Pesquisar</button>
-  </div>
+    <!-- Campo de busca para pesquisar produtos -->
+    <div *ngIf="menuType === 'default'" class="nav-search">
+      <input
+        type="text"
+        #searchInput
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="searchProducts(searchTerm)"
+        class="form-control"
+        placeholder="🔍 Pesquisar Canetas..."
+      />
+      <button
+        class="btn btn-outline-primary"
+        (click)="submitSearch(searchTerm)"
+      >
+        Pesquisar
+      </button>
 
-  <ul>
-    <li>
-      <a routerLink="/">Home</a>
-    </li>
-    <li>
-      <a routerLink="/seller-auth">Vendedor</a>
-    </li>
-    <li>
-      <a href="#">Login</a>
-    </li>
-    <li>
-      <a href="#">Carrinho(0)</a>
-    </li>
-  </ul>
-</nav>
+      <!-- Lista de sugestões (aparece quando houver resultados) -->
+      <ul class="suggested-search" *ngIf="searchResult.length > 0">
+        <li *ngFor="let item of searchResult">
+          <a>{{ item.name }}</a>
+          <a>{{ item.price | currency }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Menus para visitante e vendedor -->
+    <div [ngSwitch]="menuType">
+      <!-- Menu para visitantes -->
+      <ul *ngSwitchCase="'default'" class="nav-links">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link btn btn-outline-primary">
+            🏠 Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="seller-auth" class="nav-link btn btn-outline-primary">
+            🛍️ Área do Vendedor
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="login" class="nav-link btn btn-outline-primary">
+            🔑 Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="cart" class="nav-link btn btn-outline-primary">
+            🛒 Carrinho (0)
+          </a>
+        </li>
+      </ul>
+
+      <!-- Menu para vendedores -->
+      <ul *ngSwitchCase="'seller'" class="nav-links">
+        <li class="nav-item">
+          <a
+            routerLink="seller-add-product"
+            class="nav-link btn btn-outline-primary"
+          >
+            ➕ Adicionar Caneta
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="seller-home" class="nav-link btn btn-outline-primary">
+            📋 Lista de Canetas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="logout()" class="nav-link btn btn-outline-danger">
+            🚪 Sair
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="sellerName">
+          <span class="nav-link btn btn-outline-success">
+            👤 {{ sellerName | titlecase }}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,66 @@
+/* 🌟 Ajuste do container principal */
+.search-item {
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  background: #f8f6f6d7;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.search-item:hover {
+  transform: scale(1.02);
+}
+
+/* 🌟 Ajuste da imagem do produto */
+.search-item img {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* 🌟 Ajuste dos detalhes do produto */
+.details {
+  flex: 1;
+  padding-left: 15px;
+}
+
+.details h6 {
+  margin: 5px 0;
+  color: seagreen;
+  font-size: 16px;
+}
+
+.details p {
+  margin: 5px 0;
+  color: darkslategray;
+  font-size: 14px;
+}
+
+/* 🌟 Estilização das tags de cor e categoria */
+.details span {
+  display: inline-block;
+  background: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+/* 🌟 Responsividade */
+@media (max-width: 768px) {
+  .search-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-item img {
+    max-width: 100px;
+    margin-bottom: 10px;
+  }
+}

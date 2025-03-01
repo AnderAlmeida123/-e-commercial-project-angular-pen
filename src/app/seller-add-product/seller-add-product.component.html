@@ -1,0 +1,62 @@
+<div class="add-product">
+  <h1 class="title">Cadastro Produtos</h1>
+  <p class="message-p">{{ addProductMessage }}</p>
+
+  <!-- Formulário de cadastro -->
+  <form
+    #addProduct="ngForm"
+    (ngSubmit)="submit(addProduct.value)"
+    class="common-form"
+  >
+    <input
+      class="form-input"
+      type="text"
+      ngModel
+      name="name"
+      placeholder="Digite o Nome do Produto"
+      required
+    />
+    <input
+      class="form-input"
+      type="text"
+      ngModel
+      name="price"
+      placeholder="Preço do Produto"
+      required
+    />
+    <input
+      class="form-input"
+      type="text"
+      ngModel
+      name="color"
+      placeholder="Cor do Produto"
+      required
+    />
+    <input
+      class="form-input"
+      type="text"
+      ngModel
+      name="category"
+      placeholder="Categoria do Produto"
+      required
+    />
+    <textarea
+      class="form-input"
+      ngModel
+      name="description"
+      placeholder="Descrição do Produto"
+      required
+    ></textarea>
+    <input
+      class="form-input"
+      type="text"
+      ngModel
+      name="image"
+      placeholder="Url da Img do Produto"
+      required
+    />
+
+    <!-- Corrigido: Alterado para um botão de submit -->
+    <button type="submit" class="form-button">Cadastrar Produto</button>
+  </form>
+</div>

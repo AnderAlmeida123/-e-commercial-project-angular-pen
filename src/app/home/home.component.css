@@ -1,0 +1,121 @@
+/* 🌟 Ajuste do container principal */
+.home-container {
+  max-width: 1200px;
+  margin: 80px auto 20px;
+  padding: 20px;
+}
+
+/* 🌟 Estilização do Carousel */
+.ngb-carousel {
+  max-width: 900px;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 500px; /* Mantém todas as imagens no mesmo tamanho */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Garante que a imagem não fique distorcida */
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* 🌟 Estilização da Lista de Produtos */
+.product-list-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.product-list-wrapper h1 {
+  text-align: center;
+  color: teal;
+  margin-bottom: 20px;
+}
+
+/* 🌟 Ajuste para os cards de produtos */
+.product-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+/* 🌟 Ajuste para a imagem do produto */
+.product-item img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* 🌟 Detalhes do produto */
+.product-details h6 {
+  margin: 5px 0;
+  color: seagreen;
+  font-size: 16px;
+}
+
+/* 🌟 Informações adicionais */
+.product-color h6 {
+  font-size: 14px;
+  color: darkslategray;
+}
+
+/* 🌟 Rodapé dos produtos */
+/* 🌟 Rodapé dos produtos */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+.product-footer a {
+  flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background: teal;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.product-footer a:hover {
+  background: darkgreen;
+}
+
+/* 🌟 Responsividade */
+@media (max-width: 768px) {
+  .carousel-slide {
+    height: 300px;
+  }
+
+  .product-item {
+    margin-bottom: 20px;
+  }
+}

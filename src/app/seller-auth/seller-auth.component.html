@@ -1,11 +1,16 @@
+<!-- Container principal da autenticação do vendedor -->
 <div class="seller-auth">
+  <!-- Se 'showLogin' for falso, exibe o formulário de cadastro -->
   <div *ngIf="!showLogin" class="sign-up">
     <h1>Cadastrar Vendedor</h1>
+
+    <!-- Formulário de cadastro -->
     <form
       #sellerSignUp="ngForm"
       (ngSubmit)="signUp(sellerSignUp.value)"
       class="comom-form"
     >
+      <!-- Campo de entrada para o nome -->
       <input
         class="form-input"
         type="text"
@@ -13,6 +18,7 @@
         name="name"
         placeholder="Digite seu Nome"
       />
+      <!-- Campo de entrada para a senha -->
       <input
         class="form-input"
         type="password"
@@ -20,35 +26,48 @@
         name="password"
         placeholder="Digite sua Senha"
       />
+      <!-- Campo de entrada para o email -->
       <input
         class="form-input"
-        type="text"
-        ngModel
+        type="email"
         name="email"
         placeholder="Digite seu Email"
+        ngModel
       />
+
+      <!-- Botão de cadastro -->
       <button class="form-button">Cadastrar</button>
-      <a class="auth-toggle-link" (click)="openLogin()"
-        >Ja é Cadastrado? - Click aqui para Entrar</a
-      >
+
+      <!-- Link para alternar para o login -->
+      <a class="auth-toggle-link" (click)="openLogin()">
+        Já é Cadastrado? - Clique aqui para Entrar
+      </a>
     </form>
   </div>
 
+  <!-- Se 'showLogin' for verdadeiro, exibe o formulário de login -->
   <div *ngIf="showLogin" class="login">
     <h1>Login de Vendedor</h1>
+
+    <!-- Exibe mensagem de erro, se houver -->
     <p class="error-p">{{ authError }}</p>
+
+    <!-- Formulário de login -->
     <form
       #sellerLogin="ngForm"
       (ngSubmit)="login(sellerLogin.value)"
       class="comom-form"
     >
+      <!-- Campo de entrada para o email -->
       <input
         class="form-input"
-        type="text"
+        type="email"
         name="email"
         placeholder="Digite seu Email"
         ngModel
       />
+
+      <!-- Campo de entrada para a senha -->
       <input
         class="form-input"
         type="password"
@@ -57,10 +76,34 @@
         placeholder="Digite sua Senha"
       />
 
+      <!-- Botão de login -->
       <button class="form-button">Login</button>
-      <a class="auth-toggle-link" (click)="openSignUp()"
-        >Ainda não é Cadastrado? - Click aqui para Cadastrar.</a
-      >
+
+      <!-- Link para alternar para o cadastro -->
+      <a class="auth-toggle-link" (click)="openSignUp()">
+        Ainda não é Cadastrado? - Clique aqui para Cadastrar.
+      </a>
     </form>
   </div>
 </div>
+<!-- 🔎 O que esse código faz?
+Gerencia dois formulários:
+
+Cadastro (sign-up) → Mostrado quando showLogin é false.
+Login (login) → Mostrado quando showLogin é true.
+Utiliza ngIf para alternar entre os formulários:
+
+*ngIf="!showLogin" → Exibe o formulário de cadastro quando showLogin for false.
+*ngIf="showLogin" → Exibe o formulário de login quando showLogin for true.
+Cada formulário contém:
+
+Campos para entrada de email, senha e nome (somente no cadastro).
+Botão de ação (Cadastrar ou Login).
+Links para alternar entre Login e Cadastro, que chamam as funções openLogin() e openSignUp().
+Uso do ngModel:
+
+Permite vincular os valores digitados no formulário às variáveis no TypeScript.
+Exibe mensagem de erro no login (authError)
+
+Se houver erro, ele será mostrado acima do formulário de login.
+ -->

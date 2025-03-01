@@ -1,42 +1,122 @@
+/* 🌟 Estilização do Header */
+header {
+  width: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixar no topo */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Garantir que fique sobreposto a outros elementos */
+}
+
+/* 🌟 Ajuste para a navegação */
 .nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
-.nav h1 {
+
+.nav h1 a {
   color: teal;
-  margin: 0;
-  font-size: 40px;
-}
-.nav ul {
-  display: inline-flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.nav li {
-  padding-left: 15px;
-  padding-top: 15px;
-}
-.nav li a {
   text-decoration: none;
-  color: teal;
+  font-size: 28px;
+  font-weight: bold;
 }
-.nav .nav-search {
-  flex: 1;
+
+/* 🌟 Ajuste para a barra de pesquisa */
+.nav-search {
   display: flex;
-  margin-left: 5%;
-  margin-right: 5%;
+  align-items: center;
+  width: 300px;
+  max-width: 100%;
 }
-.nav .nav-search input {
-  flex: 1;
-  color: teal;
+
+.nav-search input {
+  flex-grow: 1;
   border: 1px solid teal;
-  height: 35px;
-  border-right: 0px;
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
 }
-.nav .nav-search button {
-  color: teal;
+
+.nav-search button {
   border: 1px solid teal;
-  height: 39px;
-  border-left: 0px;
+  border-left: 0;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-search button:hover {
+  background-color: teal;
+  color: white;
+}
+
+/* 🌟 Ajustes para os links da navegação */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 16px;
+  color: teal;
+}
+
+.nav-links a:hover {
+  color: green;
+}
+/* 🌟 Ajustes para a lista de sugestões */
+.suggested-search {
+  position: absolute;
+  top: 60px; /* Ajuste o valor aqui conforme necessário para que fique logo abaixo do campo de pesquisa */
+  /* left: 0;  Garantir que a lista comece alinhada à esquerda do campo de pesquisa */
+  z-index: 10;
+  display: block; /* Mudado para block em vez de list-item */
+  list-style: none; /* Remove os marcadores */
+  padding-left: 0; /* Remover qualquer padding à esquerda */
+  margin-left: 0; /* Remover qualquer margem à esquerda */
+  border: 1px solid #ddd;
+  background-color: #fff;
+  width: 100%; /* Use a mesma largura do campo de pesquisa */
+  max-width: 300px; /* Limite de largura para a lista */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Para dar um leve sombreado */
+}
+
+.suggested-search li {
+  padding: 10px;
+  margin: 0; /* Remover margem para evitar recuo */
+  border-bottom: 1px solid #ddd; /* Adiciona uma separação entre os itens */
+  text-align: left; /* Garantir que o texto fique alinhado à esquerda */
+}
+
+.suggested-search li a {
+  cursor: pointer;
+  color: black;
+  text-decoration: none; /* Remover sublinhado nos links */
+}
+
+.suggested-search li:hover {
+  background-color: #f0f0f0; /* Destacar ao passar o mouse */
+}
+
+/* 🌟 Responsividade */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-search {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }

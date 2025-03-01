@@ -7,58 +7,75 @@
       "id": "1"
     },
     {
-      "name": "ander2",
-      "password": "ander@ander2",
-      "email": "1234",
-      "id": "2"
-    },
-    {
-      "id": "6a4b",
-      "name": "Anderson ",
-      "password": "1234",
-      "email": "anderson_raft@hotmail.com"
-    },
-    {
-      "id": "458b",
-      "name": "Ander",
+      "id": "050f",
+      "name": "ander",
       "password": "123",
       "email": "ander@ander"
+    }
+  ],
+  "products": [
+    {
+      "name": "Caneta Medicina",
+      "price": "15",
+      "color": "Vermelha",
+      "category": "canetas",
+      "description": "Caneta personalizada para Saúde com diversas cores disponiveis",
+      "image": "https://i.ibb.co/KpgSvPgM/IMG-20250223-WA0039.jpg",
+      "id": "1"
     },
     {
-      "id": "a819",
-      "name": "teste1",
-      "password": "123",
-      "email": "teste@teste"
+      "id": "bb52",
+      "name": "Caneta Stitch",
+      "price": "15",
+      "color": "Azul",
+      "category": "canetas",
+      "description": "Linda Caneta personalizada do Stitch",
+      "image": "https://i.ibb.co/tkdRL1g/IMG-20250223-WA0038.jpg"
     },
     {
-      "id": "ed99",
-      "name": "teste2",
-      "password": "teste2",
-      "email": "teste2@teste2"
+      "name": "Caneta Florzinha",
+      "price": "15",
+      "color": "Vermelha",
+      "category": "canetas",
+      "description": "Linda Caneta personalizada da Florzinha",
+      "image": "https://i.ibb.co/W45MP4jc/IMG-20250223-WA0037.jpg",
+      "id": "bb53"
     },
     {
-      "id": "f641",
-      "name": "user4",
-      "password": "123",
-      "email": "123@123"
+      "name": "Caneta Lindinha",
+      "price": "15",
+      "color": "Azul",
+      "category": "canetas",
+      "description": "Linda Caneta personalizada da Lindinha",
+      "image": "https://i.ibb.co/VYzBJtVt/IMG-20250223-WA0034.jpg",
+      "id": "bb54"
     },
     {
-      "id": "77bd",
-      "name": "Ander",
-      "password": "123",
-      "email": "ander@ander"
+      "name": "Caneta Docinho",
+      "price": "15",
+      "color": "Verde/Azul",
+      "category": "canetas",
+      "description": "Linda Caneta personalizada da Docinho",
+      "image": "https://i.ibb.co/60PsXGQg/IMG-20250223-WA0035.jpg",
+      "id": "bb55"
     },
     {
-      "id": "4240",
-      "name": "Anderson ",
-      "password": "123",
-      "email": "123@123"
+      "name": "Caneta Libras",
+      "price": "15",
+      "color": "Azul",
+      "category": "canetas",
+      "description": "Linda Caneta personalizada de Libras",
+      "image": "https://i.ibb.co/W4XHnvsP/IMG-20250223-WA0036.jpg",
+      "id": "bb56"
     },
     {
-      "id": "8d9b",
-      "name": "Ander",
-      "password": "1234",
-      "email": "1234@1234"
+      "id": "74c8",
+      "name": "carrinho",
+      "price": "150",
+      "color": "amarelo",
+      "category": "carrinho de binquedo",
+      "description": "carrinho",
+      "image": "https://cdn.awsli.com.br/600x450/1145/1145210/produto/1437391153ad7c7c424.jpg"
     }
   ]
 }

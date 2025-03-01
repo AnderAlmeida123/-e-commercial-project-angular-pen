@@ -1,0 +1,16 @@
+<!-- toda vez que for usar o *ngFor, lembrar de importar no imports component -->
+
+<div class="row search-item" *ngFor="let item of searchResult">
+  <div class="col-sm-3">
+    <img src="{{ item.image }}" alt="" />
+  </div>
+  <div class="col-sm-8 details">
+    <h6>{{ item.name }}</h6>
+    <h6>{{ item.price }}</h6>
+    <p>
+      <span>{{ item.color }}</span>
+      <span>Categoria: {{ item.category }}</span>
+    </p>
+    <p>{{ item.description }}</p>
+  </div>
+</div>

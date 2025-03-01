@@ -1,0 +1,74 @@
+/* 🌟 Estilos do Título */
+.title {
+  text-align: center;
+  color: green;
+  margin-bottom: 20px;
+}
+
+/* 🌟 Estilos do Formulário de Cadastro */
+.update-product {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.message-p {
+  color: green;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🌟 Formulário Comum */
+.common-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 🌟 Campos de Entrada */
+.form-input {
+  height: 35px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border: 1px solid seagreen;
+  color: seagreen;
+  border-radius: 5px;
+}
+
+.form-input:focus {
+  border-color: darkgreen;
+  outline: none;
+}
+
+/* 🌟 Botão de Submissão */
+.form-button {
+  height: 35px;
+  border: 1px solid seagreen;
+  color: seagreen;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.form-button:hover {
+  background-color: seagreen;
+  color: white;
+}
+
+/* 🌟 Resposta de Sucesso ou Erro */
+.message-p {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 🌟 Estilos para Inputs Inválidos */
+.invalid-input {
+  color: red;
+  font-size: 12px;
+  margin-top: -20px;
+}
