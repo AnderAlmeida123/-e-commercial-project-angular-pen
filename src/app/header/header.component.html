@@ -1,20 +1,17 @@
-<!-- Barra de navegação principal -->
 <header>
   <nav class="nav">
-    <!-- Título/logo da loja -->
     <h1>
       <a routerLink="/" class="text-decoration-none">
         🖊️ Canetas Personalizadas
       </a>
     </h1>
 
-    <!-- Campo de busca para pesquisar produtos -->
     <div *ngIf="menuType === 'default'" class="nav-search">
       <input
         type="text"
-        #searchInput
         [(ngModel)]="searchTerm"
         (ngModelChange)="searchProducts(searchTerm)"
+        (blur)="hideSearch()"
         class="form-control"
         placeholder="🔍 Pesquisar Canetas..."
       />
@@ -24,66 +21,75 @@
       >
         Pesquisar
       </button>
-
-      <!-- Lista de sugestões (aparece quando houver resultados) -->
       <ul class="suggested-search" *ngIf="searchResult.length > 0">
         <li *ngFor="let item of searchResult">
-          <a>{{ item.name }}</a>
-          <a>{{ item.price | currency }}</a>
+          <a (mousedown)="redirectToDetails(item.id)"> {{ item.name }} </a>
         </li>
       </ul>
     </div>
 
-    <!-- Menus para visitante e vendedor -->
     <div [ngSwitch]="menuType">
-      <!-- Menu para visitantes -->
+      <!-- Menu para Visitantes -->
       <ul *ngSwitchCase="'default'" class="nav-links">
-        <li class="nav-item">
-          <a routerLink="/" class="nav-link btn btn-outline-primary">
-            🏠 Home
-          </a>
+        <li>
+          <a routerLink="/" class="nav-link btn btn-outline-primary">🏠 Home</a>
         </li>
-        <li class="nav-item">
-          <a routerLink="seller-auth" class="nav-link btn btn-outline-primary">
-            🛍️ Área do Vendedor
-          </a>
+        <li>
+          <a routerLink="seller-auth" class="nav-link btn btn-outline-primary"
+            >🛍️ Área do Vendedor</a
+          >
         </li>
-        <li class="nav-item">
-          <a routerLink="login" class="nav-link btn btn-outline-primary">
-            🔑 Login
-          </a>
+
+        <!-- Se o usuário estiver logado, exibe o nome e o botão de logout -->
+        <li *ngIf="userName">
+          <span class="nav-link btn btn-outline-success"
+            >👤 {{ userName | titlecase }}</span
+          >
         </li>
-        <li class="nav-item">
-          <a routerLink="cart" class="nav-link btn btn-outline-primary">
-            🛒 Carrinho (0)
-          </a>
+        <li *ngIf="userName">
+          <a (click)="logout()" class="nav-link btn btn-outline-danger"
+            >🚪 Sair</a
+          >
+        </li>
+
+        <!-- Se não estiver logado, exibe Login/Cadastrar -->
+        <li *ngIf="!userName">
+          <a routerLink="/user-auth" class="nav-link btn btn-outline-primary"
+            >🔑 Login/Cadastrar</a
+          >
+        </li>
+
+        <li>
+          <a routerLink="cart" class="nav-link btn btn-outline-primary"
+            >🛒 Carrinho (0)</a
+          >
         </li>
       </ul>
 
-      <!-- Menu para vendedores -->
+      <!-- Menu para Vendedores -->
       <ul *ngSwitchCase="'seller'" class="nav-links">
-        <li class="nav-item">
+        <li>
           <a
             routerLink="seller-add-product"
             class="nav-link btn btn-outline-primary"
+            >➕ Adicionar Caneta</a
           >
-            ➕ Adicionar Caneta
-          </a>
         </li>
-        <li class="nav-item">
-          <a routerLink="seller-home" class="nav-link btn btn-outline-primary">
-            📋 Lista de Canetas
-          </a>
+        <li>
+          <a routerLink="seller-home" class="nav-link btn btn-outline-primary"
+            >📋 Lista de Canetas</a
+          >
         </li>
-        <li class="nav-item">
-          <a (click)="logout()" class="nav-link btn btn-outline-danger">
-            🚪 Sair
-          </a>
+
+        <li *ngIf="sellerName">
+          <span class="nav-link btn btn-outline-success"
+            >👤 {{ sellerName | titlecase }}</span
+          >
         </li>
-        <li class="nav-item" *ngIf="sellerName">
-          <span class="nav-link btn btn-outline-success">
-            👤 {{ sellerName | titlecase }}
-          </span>
+        <li>
+          <a (click)="logout()" class="nav-link btn btn-outline-danger"
+            >🚪 Sair</a
+          >
         </li>
       </ul>
     </div>

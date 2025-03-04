@@ -1,9 +1,12 @@
 <section class="home-container">
   <!-- Carousel -->
-  <ngb-carousel *ngIf="popularProducts.length > 0">
+  <ngb-carousel *ngIf="popularProducts.length > 0" class="ngb-carousel">
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
       <figure class="carousel-slide">
-        <img class="product-img" [src]="item.image" [alt]="item.name" />
+        <a routerLink="/details/{{ item.id }}"
+          ><img class="product-img" [src]="item.image" [alt]="item.name"
+        /></a>
+
         <figcaption class="carousel-caption">
           <h3>{{ item.name }}</h3>
           <p>{{ item.description }}</p>
@@ -29,7 +32,7 @@
       </article>
       <div class="product-footer">
         <a
-          href="#"
+          routerLink="/details/{{ item.id }}"
           class="btn btn-primary"
           aria-label="Ver mais detalhes do produto"
           >+ Detalhes do Produto</a

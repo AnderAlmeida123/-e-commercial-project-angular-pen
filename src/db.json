@@ -77,5 +77,19 @@
       "description": "carrinho",
       "image": "https://cdn.awsli.com.br/600x450/1145/1145210/produto/1437391153ad7c7c424.jpg"
     }
+  ],
+  "users": [
+    {
+      "id": "3325",
+      "name": "raft",
+      "email": "ander@123",
+      "password": "123"
+    },
+    {
+      "id": "8afa",
+      "name": "raft",
+      "email": "raft@raft",
+      "password": "123"
+    }
   ]
 }

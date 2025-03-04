@@ -20,7 +20,7 @@ header {
 .nav h1 a {
   color: teal;
   text-decoration: none;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
 }
 
@@ -61,7 +61,7 @@ header {
 
 .nav-links a {
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
   color: teal;
 }
 
@@ -103,20 +103,22 @@ header {
 }
 
 /* 🌟 Responsividade */
-@media (max-width: 768px) {
-  .nav {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 480px) {
+  .nav h1 a {
+    font-size: 18px;
   }
 
-  .nav-search {
-    width: 100%;
-    margin-top: 10px;
+  .nav-search input {
+    font-size: 14px;
+    padding: 6px;
   }
 
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  .nav-search button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .suggested-search {
+    font-size: 14px;
   }
 }

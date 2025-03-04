@@ -3,6 +3,11 @@
   font-family: sans-serif;
 }
 
+/* Alternativa para garantir que todo o conteúdo abaixo da navbar não seja coberto */
+.main-content {
+  margin-top: 70px; /* Deve ser igual ou maior que a altura da navbar */
+}
+
 .container {
   margin-left: 5%;
   margin-right: 5%;

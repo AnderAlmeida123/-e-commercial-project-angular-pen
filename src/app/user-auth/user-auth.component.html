@@ -1,0 +1,69 @@
+<div class="user-auth">
+  <!-- Se o usuário estiver logado, exibe o nome e o botão de sair -->
+  <div *ngIf="isLoggedIn" class="user-info">
+    <span>Bem-vindo, {{ userName }}!</span>
+    <button (click)="logout()">Sair</button>
+  </div>
+
+  <!-- Formulário de Cadastro -->
+  <div *ngIf="!isLoggedIn && !showLogin" class="user-Signup">
+    <h1>Cadastrar Usuário</h1>
+    <form
+      #userSignup="ngForm"
+      class="common-form"
+      (ngSubmit)="signUp(userSignup.value)"
+    >
+      <input
+        type="text"
+        class="form-input"
+        placeholder="Digite seu Nome"
+        name="name"
+        ngModel
+      />
+      <input
+        type="email"
+        class="form-input"
+        placeholder="Digite seu Email"
+        name="email"
+        ngModel
+      />
+      <input
+        type="password"
+        class="form-input"
+        placeholder="Digite sua Senha"
+        name="password"
+        ngModel
+        autocomplete="current-password"
+      />
+      <button type="submit" class="form-button">Cadastrar</button>
+      <p>Já é cadastrado? <a (click)="openLogin()">Clique Aqui</a></p>
+    </form>
+  </div>
+
+  <!-- Formulário de Login -->
+  <div *ngIf="!isLoggedIn && showLogin" class="user-Login">
+    <h1>Login</h1>
+    <form
+      #userLogin="ngForm"
+      class="common-form"
+      (ngSubmit)="login(userLogin.value)"
+    >
+      <input
+        type="email"
+        class="form-input"
+        placeholder="Digite seu Email"
+        name="email"
+        ngModel
+      />
+      <input
+        type="password"
+        class="form-input"
+        placeholder="Digite sua Senha"
+        name="password"
+        ngModel
+      />
+      <button type="submit" class="form-button">Logar</button>
+      <p>Crie seu Cadastro <a (click)="openSignup()">Clique Aqui</a></p>
+    </form>
+  </div>
+</div>

@@ -4,11 +4,12 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { product } from '../data.types';
 import { ProductService } from '../services/product.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, NgbCarouselModule, CommonModule],
+  imports: [FormsModule, NgbCarouselModule, CommonModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

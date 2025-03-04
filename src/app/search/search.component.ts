@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { product } from '../data.types'; // Certifique-se de que o tipo 'Product' está correto
 import { ProductService } from '../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
@@ -49,6 +49,7 @@ export class SearchComponent implements OnInit {
     // Converte o termo de pesquisa para minúsculas e verifica se o valor existe em algum campo
     return (
       product.name.toLowerCase().includes(query.toLowerCase()) ||
+      product.color.toLowerCase().includes(query.toLowerCase()) ||
       product.price.toString().toLowerCase().includes(query.toLowerCase()) ||
       product.description?.toLowerCase().includes(query.toLowerCase()) || // Verifica a descrição, se existir
       // Adicione outros campos aqui, conforme necessário

@@ -1,64 +1,26 @@
-## APP.ROUTES ## import { Routes } from '@angular/router'; import {
-HomeComponent } from './home/home.component'; import { SellerAuthComponent }
-from './seller-auth/seller-auth.component'; export const routes: Routes = [ {
-path: '', component: HomeComponent, // Página inicial (rota raiz "/") }, { path:
-'seller-auth', component: SellerAuthComponent, // Rota para autenticação do
-vendedor "/seller-auth" }, ]; 🔹 Explicação Routes → Tipo que define um array de
-rotas. path: '' → Define a rota raiz (quando o usuário acessa /). component:
-HomeComponent → Indica qual componente será renderizado para essa rota. path:
-'seller-auth' → Quando o usuário acessa /seller-auth, o SellerAuthComponent será
-carregado. ------//------ ## APP.CONFIG ## import { ApplicationConfig } from
-'@angular/core'; import { provideRouter } from '@angular/router'; import {
-routes } from './app.routes'; // Importa as rotas definidas no arquivo
-app.routes.ts import { provideClientHydration } from
-'@angular/platform-browser'; // Importando os componentes diretamente import {
-FormsModule } from '@angular/forms'; // Para trabalhar com formulários export
-const appConfig: ApplicationConfig = { providers: [ provideRouter(routes), //
-Registra o sistema de rotas da aplicação provideClientHydration(), // Garante
-que a aplicação seja renderizada corretamente no navegador FormsModule, //
-Permite usar formulários no Angular ], }; 🔹 Explicação ApplicationConfig →
-Define configurações globais para a aplicação. provideRouter(routes) → Configura
-o sistema de rotas da aplicação. provideClientHydration() → Otimiza a
-renderização no navegador (recomendado para apps modernos). FormsModule →
-Permite o uso de formulários (necessário para ngForm funcionar corretamente).
--------//------- ## SELLER-AUTH-COMPONENTS.TS ## import { Component, OnInit }
-from '@angular/core'; import { CommonModule } from '@angular/common'; import {
-FormsModule } from '@angular/forms'; // Importando FormsModule para usar ngForm
-@Component({ selector: 'app-seller-auth', // Nome da tag usada para chamar o
-componente
-<app-seller-auth>
-  standalone: true, // Indica que este é um componente standalone (não precisa
-  de um módulo) imports: [CommonModule, FormsModule], // Permite usar diretivas
-  básicas e formulários templateUrl: './seller-auth.component.html', styleUrls:
-  ['./seller-auth.component.css'], // Arquivo de estilos do componente }) export
-  class SellerAuthComponent implements OnInit { constructor() {} ngOnInit():
-  void {} signUp(data: object): void { console.warn(data); // Exibe os dados do
-  formulário no console } } 🔹 Explicação @Component({...}) → Define um
-  componente Angular. selector: 'app-seller-auth' → Nome do componente para ser
-  usado em templates
-  <app-seller-auth
-    >. standalone: true → Este componente não precisa de um NgModule. imports:
-    [CommonModule, FormsModule] → Importa funcionalidades essenciais:
-    CommonModule → Permite usar *ngIf, *ngFor e outras diretivas comuns.
-    FormsModule → Necessário para usar ngForm e manipular formulários.
-    ngOnInit() → Método executado automaticamente quando o componente é
-    carregado. signUp(data: object) → Método chamado quando o usuário envia um
-    formulário. ------//------ ## SELLER-AUTH.COMPONENT.HTML ##
-
-    <form #sellerSignup="ngForm" (ngSubmit)="signUp(sellerSignup.value)">
-      <input type="text" name="name" ngModel placeholder="Nome" />
-      <input type="email" name="email" ngModel placeholder="E-mail" />
-      <input type="password" name="password" ngModel placeholder="Senha" />
-      <button type="submit">Cadastrar</button>
-    </form>
-
-    🔹 Explicação #sellerSignup="ngForm" → Cria uma referência do formulário
-    para obter seus valores. (ngSubmit)="signUp(sellerSignup.value)" → Chama a
-    função signUp ao enviar o formulário. ngModel → Faz a ligação entre os
-    campos do formulário e os dados do componente. ------//------ 🔚 Conclusão
-    Agora você tem uma estrutura básica no Angular que inclui: ✔ Configuração de
-    rotas ✔ Uso do app.config.ts para gerenciar as configurações globais ✔ Um
-    componente standalone (SellerAuthComponent) com formulário ✔ Uma função
-    signUp(data) que recebe os dados do formulário</app-seller-auth
-  ></app-seller-auth
->
+📌 Comandos Essenciais do Angular 🚀 Este repositório contém um guia rápido para
+criar componentes e serviços no Angular usando a CLI. -- 🔹 Criando Serviços
+(Service) Os serviços no Angular são usados para centralizar a lógica de
+negócios, como operações de CRUD (Create, Read, Update, Delete). Para gerar um
+serviço, utilizamos: -- ng g service services/user -- Explicação: -- ng g
+service → Gera um novo serviço. services/user → Cria a pasta services/ (caso não
+exista) e dentro dela o arquivo user.service.ts. O serviço gerado será algo
+como: typescript -- import { Injectable } from '@angular/core'; @Injectable({
+providedIn: 'root', }) export class UserService { constructor() {} // Métodos de
+CRUD serão implementados aqui } Se precisar de outro serviço, como product,
+basta rodar: ng g service services/product Isso criará product.service.ts dentro
+da pasta services/. 🔹 Criando Componentes (Component) Os componentes no Angular
+são responsáveis pela interface do usuário. Para gerar um componente, usamos: ng
+g c user-auth Explicação: ng g c → Atalho para ng generate component, que cria
+um novo componente. user-auth → Nome do componente. O comando cria a pasta
+user-auth/ contendo: user-auth.component.ts (Lógica do componente)
+user-auth.component.html (Template HTML) user-auth.component.css (Estilos do
+componente) user-auth.component.spec.ts (Arquivo para testes unitários) Se
+precisar de outro componente, como product-list, basta rodar: ng g c
+product-list Isso criará a pasta product-list/ com os arquivos necessários. 📌
+Resumo Rápido Comando Descrição ng g service services/user Cria o serviço
+user.service.ts dentro da pasta services/. ng g service services/product Cria o
+serviço product.service.ts dentro da pasta services/. ng g c user-auth Cria o
+componente user-auth com todos os arquivos necessários. ng g c product-list Cria
+o componente product-list na estrutura do projeto. Com esses comandos, você pode
+organizar melhor o código e manter um projeto Angular escalável! 🚀💡

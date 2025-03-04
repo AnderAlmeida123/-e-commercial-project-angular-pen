@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../services/product.service';
 import { RouterModule } from '@angular/router';
@@ -14,88 +14,118 @@ import { product } from '../data.types';
   imports: [RouterModule, CommonModule, FormsModule],
 })
 export class HeaderComponent implements OnInit {
-  menuType: string = 'default'; // Tipo de menu, visitante ou vendedor
-  sellerName: string = ''; // Nome do vendedor
+  menuType: string = 'default'; // Tipo de menu (padrão ou vendedor)
+  sellerName: string = ''; // Nome do vendedor logado
+  userName: string = ''; // Nome do usuário logado
   searchTerm: string = ''; // Termo de pesquisa
-  searchResult: product[] = []; // Inicializa como array vazio
+  searchResult: product[] = []; // Lista de sugestões de pesquisa
 
   constructor(
     private route: Router,
-    private productService: ProductService // Serviço de produtos
+    private productService: ProductService,
+    private cdRef: ChangeDetectorRef // Injeta o serviço de detecção de mudanças
   ) {}
 
   ngOnInit(): void {
-    this.route.events.subscribe((val: any) => {
-      if (val.url) {
-        this.updateMenuType(val.url); // Atualiza o tipo de menu com base na URL
+    // Monitora mudanças na rota para definir o menu correto
+    this.route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateMenuType(event.url);
+        this.checkLoginStatus(); // Garante que o login seja checado sempre que a rota mudar
       }
     });
-    this.checkSellerStatus(); // Verifica o status do vendedor ao inicializar
+
+    this.checkLoginStatus(); // Verifica se há um usuário ou vendedor logado
   }
 
-  // Função para verificar e atualizar o estado do vendedor
-  checkSellerStatus(): void {
-    if (typeof window !== 'undefined' && localStorage.getItem('seller')) {
-      let sellerStore = localStorage.getItem('seller');
+  // Verifica se o usuário ou vendedor está logado
+  checkLoginStatus(): void {
+    if (typeof window !== 'undefined') {
+      const sellerStore = localStorage.getItem('seller');
+      const userStore = localStorage.getItem('user');
+
       if (sellerStore) {
         let sellerData = JSON.parse(sellerStore);
-        if (Array.isArray(sellerData) && sellerData.length > 0) {
-          this.sellerName = sellerData[0].name;
-        } else {
-          this.sellerName = '';
-        }
+        this.sellerName =
+          Array.isArray(sellerData) && sellerData.length > 0
+            ? sellerData[0].name
+            : '';
+      } else {
+        this.sellerName = '';
       }
+
+      if (userStore) {
+        let userData = JSON.parse(userStore);
+        this.userName = userData.name || '';
+      } else {
+        this.userName = '';
+      }
+
+      this.cdRef.detectChanges(); // Força a atualização do UI imediatamente
     }
   }
 
-  // Atualiza o tipo de menu (visitante ou vendedor) com base na URL
+  // Define o menu com base na URL
   updateMenuType(url: string): void {
-    if (url.includes('seller')) {
-      this.menuType = 'seller';
-    } else {
-      this.menuType = 'default';
-    }
+    this.menuType = url.includes('seller') ? 'seller' : 'default';
   }
 
-  // Função de logout
+  // Realiza login do usuário
+  login(user: any): void {
+    // Supondo que você tenha um serviço que faz login e retorna as informações do usuário
+    localStorage.setItem('user', JSON.stringify(user)); // Salva as informações do usuário no localStorage
+    this.userName = user.name; // Atualiza o nome do usuário
+    this.checkLoginStatus(); // Atualiza o status do login
+    this.route.navigate(['/']); // Redireciona para a home após o login
+
+    setTimeout(() => {
+      this.cdRef.detectChanges(); // Força a atualização do template para refletir a mudança
+    }, 100); // Pequeno delay para garantir que a navegação tenha ocorrido
+  }
+
+  // Realiza logout do usuário ou vendedor
   logout(): void {
-    localStorage.removeItem('seller'); // Remove as informações do vendedor
-    this.sellerName = ''; // Limpa o nome do vendedor
+    localStorage.removeItem('user');
+    localStorage.removeItem('seller');
+    this.userName = '';
+    this.sellerName = '';
+    this.menuType = 'default'; // Reseta o menu para o estado de visitante
     this.route.navigate(['/']); // Redireciona para a página inicial
+
+    this.cdRef.detectChanges(); // Força a atualização do template para refletir a mudança
   }
 
-  // Função de pesquisa
+  // Função de pesquisa de produtos
   searchProducts(query: string): void {
-    if (query) {
+    if (query.trim()) {
       this.productService.searchProducts(query).subscribe((result) => {
-        console.log('🔍 Resultados da pesquisa:', result);
-        this.searchResult = result.slice(0, 5); // Limita a 5 itens para exibição
+        this.searchResult = result.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        );
       });
     } else {
-      this.searchResult = []; // Limpa os resultados se não houver consulta
+      this.searchResult = [];
     }
   }
 
-  // Função para esconder os resultados de pesquisa quando o campo perder o foco
+  // Esconde a lista de pesquisa ao perder o foco
   hideSearch(): void {
-    this.searchResult = []; // Limpa os resultados ao perder o foco
+    setTimeout(() => {
+      this.searchResult = [];
+    }, 200);
   }
 
-  // Envia a pesquisa e navega para a página de resultados
+  // Realiza a pesquisa e redireciona para a página de resultados
   submitSearch(val: string): void {
     if (val) {
-      this.route.navigate([`search/${val}`]); // Navega para a página de busca com o termo
+      this.route.navigate([`search/${val}`]);
+      this.searchResult = [];
     }
   }
 
-  onSearchChange(query: string): void {
-    if (query) {
-      this.productService.searchProducts(query).subscribe((result) => {
-        console.log('🔍 Resultados da pesquisa:', result);
-        this.searchResult = result.slice(0, 5); // Limita a 5 itens
-      });
-    } else {
-      this.searchResult = []; // Limpa os resultados se não houver consulta
-    }
+  // Redireciona para os detalhes do produto
+  redirectToDetails(id: number) {
+    this.searchResult = [];
+    this.route.navigate(['/details/', id]);
   }
 }

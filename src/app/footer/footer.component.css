@@ -1,0 +1,34 @@
+.footer {
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+  color: white;
+  padding: 40px 0;
+}
+
+.footer-link {
+  color: #17a2b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #00d9ff;
+}
+
+.social-icons .btn-social {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-icons .btn-social:hover {
+  background: #00d9ff;
+  color: #fff;
+  transform: scale(1.1);
+}

@@ -14,9 +14,16 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* 🌟 Ajuste do alinhamento do carrossel */
+.ngb-carousel .carousel-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🌟 Ajuste das imagens do Carousel */
 .carousel-slide {
   width: 100%;
-  height: 500px; /* Mantém todas as imagens no mesmo tamanho */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,16 +31,27 @@
 }
 
 .product-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Garante que a imagem não fique distorcida */
+  max-width: 100%;
+  height: auto;
+  max-height: 400px; /* Define um limite de altura para evitar imagens desproporcionais */
+  object-fit: contain;
+  border-radius: 10px;
 }
 
+/* 🌟 Estilização do texto dentro do Carousel */
 .carousel-caption {
   background: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 10px 30px; /* Aumenta o espaço nas laterais */
+  text-align: center;
+  width: 100%; /* Define um tamanho menor para criar margem nas laterais */
+  max-width: 99%; /* Define um limite para a largura */
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza a legenda corretamente */
+  justify-content: center;
+  align-items: center;
 }
 
 /* 🌟 Estilização da Lista de Produtos */
@@ -73,29 +91,44 @@
 }
 
 /* 🌟 Detalhes do produto */
+.product-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f6f6d7;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.product-details:hover {
+  transform: scale(1.02);
+}
+
+/* 🌟 Ajuste dos textos nos detalhes do produto */
 .product-details h6 {
   margin: 5px 0;
   color: seagreen;
   font-size: 16px;
 }
 
-/* 🌟 Informações adicionais */
 .product-color h6 {
   font-size: 14px;
   color: darkslategray;
 }
 
 /* 🌟 Rodapé dos produtos */
-/* 🌟 Rodapé dos produtos */
 .product-footer {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
-  gap: 10px; /* Espaçamento entre os botões */
+  gap: 10px;
 }
 
 .product-footer a {
-  flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+  flex: 1;
   text-align: center;
   text-decoration: none;
   color: white;
@@ -111,11 +144,34 @@
 
 /* 🌟 Responsividade */
 @media (max-width: 768px) {
+  .ngb-carousel {
+    max-width: 100%;
+  }
+
   .carousel-slide {
     height: 300px;
   }
 
+  .product-img {
+    max-height: 250px;
+  }
+
+  .carousel-caption {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .product-details {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .product-item {
     margin-bottom: 20px;
+  }
+
+  .product-image {
+    max-width: 200px;
+    margin-bottom: 15px;
   }
 }

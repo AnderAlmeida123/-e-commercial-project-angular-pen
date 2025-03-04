@@ -21,6 +21,13 @@ export interface product {
   id: number;
 }
 
+export interface signUp {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
 /*
 🔎 O que esse código faz?
 Define as interfaces SignUp e login, que padronizam os dados que serão enviados e recebidos no sistema de autenticação.
