@@ -17,7 +17,15 @@ export class UserAuthComponent implements OnInit {
   isLoggedIn: boolean = false;
   userName: string = ''; // 🔹 Adicionado para armazenar o nome do usuário
 
-  constructor(private user: UserService, private router: Router) {}
+  constructor(
+    private user: UserService,
+    private router: Router,
+    public userService: UserService
+  ) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      // Seu código que usa o localStorage
+    }
+  }
 
   ngOnInit(): void {
     console.log('UserAuthComponent inicializado.');
