@@ -45,7 +45,6 @@ export class UserService {
     console.log('Registrando usuário:', user);
 
     this.http
-<<<<<<< HEAD
       .post(
         'https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/users',
         user,
@@ -58,25 +57,6 @@ export class UserService {
           this.isLoggedInSubject.next(true); // Atualiza o estado de login
           this.router.navigate(['/']);
         }
-=======
-      .post<signUp>(this.apiUrl, user, { observe: 'response' })
-      .subscribe({
-        next: (result) => {
-          if (result && result.body) {
-            const { password, ...userWithoutPassword } = result.body;
-            if (isPlatformBrowser(this.platformId)) {
-              localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-            }
-            this.isLoggedInSubject.next(true);
-            this.router.navigate(['/']);
-          } else {
-            console.warn('Erro: resposta de cadastro sem corpo válido.');
-          }
-        },
-        error: (error) => {
-          console.error('Erro ao cadastrar usuário:', error);
-        },
->>>>>>> 2a2d21d
       });
   }
 
@@ -89,16 +69,10 @@ export class UserService {
     console.log('Tentando login com:', data.email);
 
     this.http
-<<<<<<< HEAD
       .get<signUp[]>(
         `https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/users?email=${data.email}&password=${data.password}`,
         { observe: 'response' }
       )
-=======
-      .get<signUp[]>(`${this.apiUrl}?email=${data.email}`, {
-        observe: 'response',
-      })
->>>>>>> 2a2d21d
       .subscribe({
         next: (result) => {
           if (result.body && result.body.length > 0) {
