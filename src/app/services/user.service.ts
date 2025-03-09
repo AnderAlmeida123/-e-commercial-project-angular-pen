@@ -22,7 +22,11 @@ export class UserService {
 
   userSignup(user: signUp) {
     this.http
-      .post('http://localhost:3000/users', user, { observe: 'response' })
+      .post(
+        'https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/users',
+        user,
+        { observe: 'response' }
+      )
       .subscribe((result) => {
         if (result && result.body) {
           const { password, ...userWithoutPassword } = result.body as signUp;
@@ -36,7 +40,7 @@ export class UserService {
   userLogin(data: login) {
     this.http
       .get<signUp[]>(
-        `http://localhost:3000/users?email=${data.email}&password=${data.password}`,
+        `https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/users?email=${data.email}&password=${data.password}`,
         { observe: 'response' }
       )
       .subscribe({

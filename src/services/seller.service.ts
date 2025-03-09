@@ -18,7 +18,11 @@ export class SellerService {
   // Método para cadastrar um novo vendedor
   userSignUp(data: SignUp) {
     this.http
-      .post('http://localhost:3000/seller', data, { observe: 'response' }) // Faz uma requisição POST para a API simulada
+      .post(
+        'https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/seller',
+        data,
+        { observe: 'response' }
+      ) // Faz uma requisição POST para a API simulada
       .subscribe({
         next: (result) => {
           this.isSellerLoggedIn.next(true); // Atualiza o estado para "logado"
@@ -61,7 +65,7 @@ export class SellerService {
     console.warn(data);
     this.http
       .get(
-        `http://localhost:3000/seller?email=${data.email}&password=${data.password}`,
+        `https://my-json-server.typicode.com/AnderAlmeida123/repository-eCommerce/seller?email=${data.email}&password=${data.password}`,
         { observe: 'response' } // Faz uma requisição GET para buscar o vendedor pelo email e senha
       )
       .subscribe((result: any) => {
