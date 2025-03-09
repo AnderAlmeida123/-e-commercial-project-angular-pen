@@ -1,0 +1,118 @@
+/* Estilo para os itens do carrinho */
+.cart-item {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px; /* Aumentei o padding para dar mais espaçamento */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-bottom: 20px; /* Aumentei o espaçamento entre os itens */
+}
+
+/* Hover para aumentar o item */
+.cart-item:hover {
+  transform: scale(1.05);
+}
+
+/* Ajuste de imagem para os produtos */
+.cart-item img {
+  max-height: 120px;
+  object-fit: contain;
+  margin-right: 15px; /* Espaço à direita da imagem */
+}
+
+/* Alinhar o nome e o preço do produto */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  flex-grow: 1; /* Garante que a área de nome e preço ocupe o espaço necessário */
+}
+
+/* Estilo da quantidade e remover */
+.d-flex {
+  align-items: center;
+  justify-content: space-between; /* Deixa os itens (quantidade e remover) bem distribuídos */
+  width: 100%; /* Garantir que o layout tenha o máximo de largura possível */
+}
+
+/* Ajustar o input da quantidade */
+input[type="number"] {
+  width: 70px; /* Aumentei a largura para dar mais espaço ao número */
+  height: 40px; /* Aumentei a altura para mais espaço */
+  padding: 5px; /* Aumentei o padding interno para evitar que os números fiquem colados às bordas */
+  text-align: center; /* Centraliza o texto/número no campo */
+  margin: 0 10px; /* Espaço entre os botões de + e - */
+  font-size: 18px; /* Aumentei o tamanho da fonte para tornar o número mais legível */
+}
+
+/* Adicionar um botão de + e - */
+button.quantity-btn {
+  width: 40px; /* Aumentei o tamanho dos botões */
+  height: 40px; /* Aumentei a altura dos botões */
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.quantity-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estilo da área de resumo do carrinho */
+.cart-summary {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+/* Melhorando a aparência dos textos na área de resumo */
+.cart-summary p {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Botões (finalizar compra e esvaziar carrinho) */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 10px; /* Adicionando espaço entre os botões */
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Botão de finalizar compra */
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* Botão de esvaziar carrinho */
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+/* Botão de remover item */
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}

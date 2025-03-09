@@ -3,10 +3,9 @@
   <ngb-carousel *ngIf="popularProducts.length > 0" class="ngb-carousel">
     <ng-template *ngFor="let item of popularProducts" ngbSlide>
       <figure class="carousel-slide">
-        <a routerLink="/details/{{ item.id }}"
-          ><img class="product-img" [src]="item.image" [alt]="item.name"
-        /></a>
-
+        <a routerLink="/details/{{ item.id }}">
+          <img class="product-img" [src]="item.image" [alt]="item.name" />
+        </a>
         <figcaption class="carousel-caption">
           <h3>{{ item.name }}</h3>
           <p>{{ item.description }}</p>
@@ -20,29 +19,42 @@
   <h1>Modelos de Produtos</h1>
   <div class="row">
     <div class="col-md-3 col-sm-6 mb-4" *ngFor="let item of allProducts">
-      <article class="product-item">
-        <img [src]="item.image" [alt]="item.name" />
-        <div class="product-details">
-          <h6>{{ item.name }}</h6>
-          <h6>Preço: R$ {{ item.price | currency : "BRL" }}</h6>
+      <article class="product-item card">
+        <img
+          [routerLink]="'/details/' + item.id"
+          [src]="item.image"
+          [alt]="item.name"
+          class="card-img-top"
+        />
+
+        <div class="product-details card-body">
+          <h6 class="card-title">{{ item.name }}</h6>
+          <p class="card-text">Preço: R$ {{ item.price | currency : "BRL" }}</p>
         </div>
-        <div class="product-color">
-          <h6>{{ item.color }}</h6>
+        <div class="product-color card-footer">
+          <!-- Exibe a cor do produto, se disponível -->
+          <p *ngIf="item.color">{{ item.color }}</p>
+          <p *ngIf="!item.color">Cor não disponível</p>
         </div>
       </article>
-      <div class="product-footer">
+      <div class="product-footer d-flex justify-content-between">
+        <!-- Link para os detalhes do produto -->
         <a
           routerLink="/details/{{ item.id }}"
           class="btn btn-primary"
           aria-label="Ver mais detalhes do produto"
-          >+ Detalhes do Produto</a
         >
+          + Detalhes do Produto
+        </a>
+        <!-- Botão para adicionar ao carrinho -->
         <a
-          href="#"
+          href="javascript:void(0)"
           class="btn btn-secondary ms-2"
           aria-label="Adicionar ao carrinho"
-          >🛒 Carrinho</a
+          (click)="addToCart(item)"
         >
+          🛒 Carrinho
+        </a>
       </div>
     </div>
   </div>
