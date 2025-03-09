@@ -90,6 +90,12 @@
       "name": "raft",
       "email": "raft@raft",
       "password": "123"
+    },
+    {
+      "id": "db674b28-248f-47da-9170-4089116aff9a",
+      "name": "raft",
+      "email": "raft@hotmail.com",
+      "password": "12345678"
     }
   ]
 }

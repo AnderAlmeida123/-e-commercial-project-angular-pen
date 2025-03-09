@@ -1,69 +1,121 @@
 <div class="user-auth">
-  <!-- Se o usuário estiver logado, exibe o nome e o botão de sair -->
-  <div *ngIf="isLoggedIn" class="user-info">
-    <span>Bem-vindo, {{ userName }}!</span>
+  <div *ngIf="isLoggedIn">
+    <span>👤 {{ userName | titlecase }}</span>
     <button (click)="logout()">Sair</button>
   </div>
 
   <!-- Formulário de Cadastro -->
-  <div *ngIf="!isLoggedIn && !showLogin" class="user-Signup">
+  <div *ngIf="!isLoggedIn && !showLogin" class="user-signup">
     <h1>Cadastrar Usuário</h1>
-    <form
-      #userSignup="ngForm"
-      class="common-form"
-      (ngSubmit)="signUp(userSignup.value)"
-    >
+    <form [formGroup]="signupForm" (ngSubmit)="signUp()">
       <input
         type="text"
         class="form-input"
         placeholder="Digite seu Nome"
-        name="name"
-        ngModel
+        formControlName="name"
+        minlength="3"
+        maxlength="50"
       />
+      <div
+        *ngIf="
+          signupForm.get('name')?.invalid && signupForm.get('name')?.touched
+        "
+        class="error"
+      >
+        Nome deve ter pelo menos 3 caracteres.
+      </div>
+
       <input
         type="email"
         class="form-input"
         placeholder="Digite seu Email"
-        name="email"
-        ngModel
+        formControlName="email"
       />
-      <input
-        type="password"
-        class="form-input"
-        placeholder="Digite sua Senha"
-        name="password"
-        ngModel
-        autocomplete="current-password"
-      />
-      <button type="submit" class="form-button">Cadastrar</button>
-      <p>Já é cadastrado? <a (click)="openLogin()">Clique Aqui</a></p>
+      <div
+        *ngIf="
+          signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+        "
+        class="error"
+      >
+        Insira um e-mail válido.
+      </div>
+
+      <div class="password-container">
+        <input
+          [type]="showSignupPassword ? 'text' : 'password'"
+          class="form-input"
+          placeholder="Digite sua Senha"
+          formControlName="password"
+          autocomplete="current-password"
+          minlength="6"
+          maxlength="8"
+        />
+      </div>
+      <div
+        *ngIf="
+          signupForm.get('password')?.invalid &&
+          signupForm.get('password')?.touched
+        "
+        class="error"
+      >
+        A senha deve ter de 6 a 8 caracteres.
+      </div>
+
+      <button type="submit" class="form-button" [disabled]="signupForm.invalid">
+        Cadastrar
+      </button>
+      <p class="link-text">
+        Já é cadastrado?
+        <button class="link-button" (click)="openLogin()">Clique Aqui</button>
+      </p>
     </form>
   </div>
 
   <!-- Formulário de Login -->
-  <div *ngIf="!isLoggedIn && showLogin" class="user-Login">
+  <div *ngIf="!isLoggedIn && showLogin" class="user-login">
     <h1>Login</h1>
-    <form
-      #userLogin="ngForm"
-      class="common-form"
-      (ngSubmit)="login(userLogin.value)"
-    >
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <input
         type="email"
         class="form-input"
         placeholder="Digite seu Email"
-        name="email"
-        ngModel
+        formControlName="email"
       />
-      <input
-        type="password"
-        class="form-input"
-        placeholder="Digite sua Senha"
-        name="password"
-        ngModel
-      />
-      <button type="submit" class="form-button">Logar</button>
-      <p>Crie seu Cadastro <a (click)="openSignup()">Clique Aqui</a></p>
+      <div
+        *ngIf="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+        class="error"
+      >
+        Insira um e-mail válido.
+      </div>
+
+      <div class="password-wrapper">
+        <input
+          [type]="showLoginPassword ? 'text' : 'password'"
+          class="form-input"
+          placeholder="Digite sua Senha"
+          formControlName="password"
+        />
+      </div>
+
+      <div
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+        class="error"
+      >
+        A senha deve ter pelo menos 6 caracteres.
+      </div>
+
+      <button type="submit" class="form-button" [disabled]="loginForm.invalid">
+        Logar
+      </button>
+      <p class="link-text">
+        Crie seu Cadastro
+        <button class="link-button" (click)="openSignup()">Clique Aqui</button>
+      </p>
     </form>
   </div>
 </div>

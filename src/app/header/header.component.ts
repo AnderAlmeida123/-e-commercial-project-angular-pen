@@ -5,6 +5,9 @@ import { ProductService } from '../services/product.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { product } from '../data.types';
+import { UserService } from '../services/user.service';
+import { CartService } from '../services/cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -19,14 +22,22 @@ export class HeaderComponent implements OnInit {
   userName: string = ''; // Nome do usuário logado
   searchTerm: string = ''; // Termo de pesquisa
   searchResult: product[] = []; // Lista de sugestões de pesquisa
+  cartItems$: Observable<product[]> = new Observable(); // 🔄 Inicializado corretamente
 
   constructor(
     private route: Router,
     private productService: ProductService,
-    private cdRef: ChangeDetectorRef // Injeta o serviço de detecção de mudanças
+    private cdRef: ChangeDetectorRef, // Injeta o serviço de detecção de mudanças
+    private userService: UserService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
+    console.log('Componente [header] inicializado.');
+
+    // 🔄 Inscrevendo-se no Observable para reatividade
+    this.cartItems$ = this.cartService.cartItems$;
+
     // Monitora mudanças na rota para definir o menu correto
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -43,6 +54,10 @@ export class HeaderComponent implements OnInit {
     if (typeof window !== 'undefined') {
       const sellerStore = localStorage.getItem('seller');
       const userStore = localStorage.getItem('user');
+
+      console.log('Verificando status de login...');
+      console.log('Dados do vendedor:', sellerStore);
+      console.log('Dados do usuário:', userStore);
 
       if (sellerStore) {
         let sellerData = JSON.parse(sellerStore);
@@ -72,6 +87,8 @@ export class HeaderComponent implements OnInit {
 
   // Realiza login do usuário
   login(user: any): void {
+    console.log('Realizando login para o usuário:', user); // Log de login
+
     // Supondo que você tenha um serviço que faz login e retorna as informações do usuário
     localStorage.setItem('user', JSON.stringify(user)); // Salva as informações do usuário no localStorage
     this.userName = user.name; // Atualiza o nome do usuário
@@ -83,16 +100,13 @@ export class HeaderComponent implements OnInit {
     }, 100); // Pequeno delay para garantir que a navegação tenha ocorrido
   }
 
-  // Realiza logout do usuário ou vendedor
   logout(): void {
-    localStorage.removeItem('user');
-    localStorage.removeItem('seller');
-    this.userName = '';
-    this.sellerName = '';
+    console.log('Realizando logout...');
+    this.userService.logout(); // Agora usamos o userService para chamar a função de logout
+    this.sellerName = ''; // Limpa o nome do vendedor
+    this.userName = ''; // Limpa o nome do usuário
     this.menuType = 'default'; // Reseta o menu para o estado de visitante
-    this.route.navigate(['/']); // Redireciona para a página inicial
-
-    this.cdRef.detectChanges(); // Força a atualização do template para refletir a mudança
+    this.cdRef.detectChanges(); // Força a atualização do UI após logout
   }
 
   // Função de pesquisa de produtos
