@@ -3,13 +3,12 @@ header {
   width: 100%;
   background-color: #f8f9fa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Fixar no topo */
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Garantir que fique sobreposto a outros elementos */
+  z-index: 1000;
 }
 
-/* 🌟 Ajuste para a navegação */
 .navbar {
   padding: 10px 20px;
 }
@@ -29,7 +28,6 @@ header {
   color: green;
 }
 
-/* 🌟 Ajustes para o menu de navegação */
 .navbar-nav {
   flex-direction: row;
 }
@@ -97,7 +95,7 @@ header {
   background-color: #f0f0f0;
 }
 
-/* 🌟 Responsividade */
+/* 🌟 Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
   .navbar {
     padding: 10px 15px;

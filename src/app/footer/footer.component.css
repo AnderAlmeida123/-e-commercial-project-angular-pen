@@ -1,9 +1,12 @@
+/* Estilo geral do footer */
 .footer {
   background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
   color: white;
   padding: 40px 0;
+  text-align: center;
 }
 
+/* Links no footer */
 .footer-link {
   color: #17a2b8;
   text-decoration: none;
@@ -14,6 +17,7 @@
   color: #00d9ff;
 }
 
+/* Ícones sociais */
 .social-icons .btn-social {
   display: inline-block;
   width: 40px;
@@ -31,4 +35,28 @@
   background: #00d9ff;
   color: #fff;
   transform: scale(1.1);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Reduzindo o padding do footer em telas menores */
+  .footer {
+    position: relative;
+    padding: 10px 0;
+    font-size: 0.9rem; /* Reduzindo o tamanho da fonte para telas pequenas */
+  }
+
+  /* Ajustando os links para ficarem em uma coluna */
+  .footer-link {
+    display: block;
+    margin: 10px 0; /* Espaço entre os links */
+  }
+
+  /* Ajustando os ícones sociais */
+  .social-icons .btn-social {
+    width: 35px;
+    height: 35px;
+    font-size: 16px; /* Reduzindo o tamanho do ícone */
+    margin: 5px;
+  }
 }

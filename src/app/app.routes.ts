@@ -43,14 +43,16 @@ export const routes: Routes = [
     component: UserAuthComponent,
   },
   {
-    path: 'cart', // ✅ Nova rota adicionada
+    path: 'cart',
     component: CartComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ], // Ativando a rolagem para o topo
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

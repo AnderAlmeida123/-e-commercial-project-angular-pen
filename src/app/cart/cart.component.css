@@ -116,3 +116,58 @@ button:hover {
   background-color: #dc3545;
   border-color: #dc3545;
 }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 60px;
+  }
+
+  /* Ajustes para telas menores (tablets, dispositivos móveis) */
+  .cart-item {
+    flex-direction: column; /* Alinha os itens verticalmente em telas pequenas */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+  }
+
+  .cart-item img {
+    max-height: 100px; /* Ajusta a altura da imagem para se adequar melhor */
+    margin-right: 0;
+    margin-bottom: 10px; /* Adiciona espaçamento abaixo da imagem */
+  }
+
+  .card-body {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .d-flex {
+    flex-direction: column; /* Empilha a quantidade e o botão de remover em dispositivos móveis */
+    align-items: flex-start;
+  }
+
+  input[type="number"] {
+    width: 60px; /* Ajusta o tamanho do input em telas pequenas */
+    font-size: 16px;
+  }
+
+  button.quantity-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  /* Ajustes na área de resumo do carrinho */
+  .cart-summary {
+    padding: 10px;
+  }
+
+  .cart-summary p {
+    font-size: 1em; /* Diminui o tamanho da fonte */
+  }
+
+  /* Ajustes nos botões */
+  button {
+    padding: 10px;
+    font-size: 1em; /* Ajusta o tamanho da fonte */
+  }
+}

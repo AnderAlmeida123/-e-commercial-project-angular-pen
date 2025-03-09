@@ -18,12 +18,14 @@
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        (click)="onMenuClick()"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="d-flex ms-auto">
+          <!-- Barra de pesquisa -->
           <div *ngIf="menuType === 'default'" class="nav-search">
             <input
               type="text"
@@ -51,39 +53,51 @@
           <!-- Links de navegação -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a routerLink="/" class="nav-link btn btn-outline-primary"
-                >🏠 Home</a
+              <a
+                routerLink="/"
+                class="nav-link btn btn-outline-primary"
+                (click)="closeMenuAfterNavigation()"
               >
+                🏠 Home
+              </a>
             </li>
             <li class="nav-item">
               <a
                 routerLink="seller-auth"
                 class="nav-link btn btn-outline-primary"
-                >🛍️ Área do Vendedor</a
+                (click)="closeMenuAfterNavigation()"
               >
+                🛍️ Área do Vendedor
+              </a>
             </li>
 
             <li *ngIf="userName" class="nav-item">
-              <span class="nav-link btn btn-outline-success"
-                >👤 {{ userName | titlecase }}</span
-              >
+              <span class="nav-link btn btn-outline-success">
+                👤 {{ userName | titlecase }}
+              </span>
             </li>
             <li *ngIf="userName" class="nav-item">
-              <a (click)="logout()" class="nav-link btn btn-outline-danger"
-                >🚪 Sair</a
-              >
+              <a (click)="logout()" class="nav-link btn btn-outline-danger">
+                🚪 Sair
+              </a>
             </li>
 
             <li *ngIf="!userName" class="nav-item">
               <a
                 routerLink="/user-auth"
                 class="nav-link btn btn-outline-primary"
-                >🔑 Login/Cadastrar</a
+                (click)="closeMenuAfterNavigation()"
               >
+                🔑 Login/Cadastrar
+              </a>
             </li>
 
             <li class="nav-item">
-              <a routerLink="cart" class="nav-link btn btn-outline-primary">
+              <a
+                routerLink="cart"
+                class="nav-link btn btn-outline-primary"
+                (click)="closeMenuAfterNavigation()"
+              >
                 🛒 Carrinho ({{ (cartItems$ | async)?.length || 0 }})
               </a>
             </li>

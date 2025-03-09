@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   searchTerm: string = ''; // Termo de pesquisa
   searchResult: product[] = []; // Lista de sugestões de pesquisa
   cartItems$: Observable<product[]> = new Observable(); // 🔄 Inicializado corretamente
+  navbarCollapse: HTMLElement | null = null;
 
   constructor(
     private route: Router,
@@ -33,20 +34,45 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Componente [header] inicializado.');
-
-    // 🔄 Inscrevendo-se no Observable para reatividade
+    this.navbarCollapse = document.getElementById('navbarNav');
     this.cartItems$ = this.cartService.cartItems$;
 
     // Monitora mudanças na rota para definir o menu correto
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.toggleMenu(false); // Fecha o menu após a navegação
         this.updateMenuType(event.url);
         this.checkLoginStatus(); // Garante que o login seja checado sempre que a rota mudar
       }
     });
 
     this.checkLoginStatus(); // Verifica se há um usuário ou vendedor logado
+  }
+
+  toggleMenu(state: boolean): void {
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse) {
+      if (state) {
+        navbarCollapse.classList.add('show'); // Abre o menu
+      } else {
+        navbarCollapse.classList.remove('show'); // Fecha o menu
+      }
+    }
+  }
+
+  onMenuClick() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse) {
+      navbarCollapse.classList.toggle('show');
+    }
+  }
+
+  // Adiciona a função de fechar o menu após a navegação
+  closeMenuAfterNavigation() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse) {
+      navbarCollapse.classList.remove('show');
+    }
   }
 
   // Verifica se o usuário ou vendedor está logado
@@ -94,10 +120,6 @@ export class HeaderComponent implements OnInit {
     this.userName = user.name; // Atualiza o nome do usuário
     this.checkLoginStatus(); // Atualiza o status do login
     this.route.navigate(['/']); // Redireciona para a home após o login
-
-    setTimeout(() => {
-      this.cdRef.detectChanges(); // Força a atualização do template para refletir a mudança
-    }, 100); // Pequeno delay para garantir que a navegação tenha ocorrido
   }
 
   logout(): void {
