@@ -10,26 +10,39 @@ header {
 }
 
 /* 🌟 Ajuste para a navegação */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar {
   padding: 10px 20px;
 }
 
-.nav h1 a {
+.navbar-brand {
   color: teal;
-  text-decoration: none;
   font-size: 26px;
   font-weight: bold;
 }
 
-/* 🌟 Ajuste para a barra de pesquisa */
+.navbar-nav .nav-link {
+  color: teal;
+  font-size: 15px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: green;
+}
+
+/* 🌟 Ajustes para o menu de navegação */
+.navbar-nav {
+  flex-direction: row;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 10px;
+}
+
+/* 🌟 Barra de Pesquisa */
 .nav-search {
   display: flex;
   align-items: center;
-  width: 300px;
-  max-width: 100%;
+  margin-right: 20px;
 }
 
 .nav-search input {
@@ -52,73 +65,79 @@ header {
   color: white;
 }
 
-/* 🌟 Ajustes para os links da navegação */
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 15px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-size: 15px;
-  color: teal;
-}
-
-.nav-links a:hover {
-  color: green;
-}
 /* 🌟 Ajustes para a lista de sugestões */
 .suggested-search {
   position: absolute;
-  top: 60px; /* Ajuste o valor aqui conforme necessário para que fique logo abaixo do campo de pesquisa */
-  /* left: 0;  Garantir que a lista comece alinhada à esquerda do campo de pesquisa */
+  top: 60px;
+  left: 0;
   z-index: 10;
-  display: block; /* Mudado para block em vez de list-item */
-  list-style: none; /* Remove os marcadores */
-  padding-left: 0; /* Remover qualquer padding à esquerda */
-  margin-left: 0; /* Remover qualquer margem à esquerda */
+  display: block;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
   border: 1px solid #ddd;
   background-color: #fff;
-  width: 100%; /* Use a mesma largura do campo de pesquisa */
-  max-width: 300px; /* Limite de largura para a lista */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Para dar um leve sombreado */
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .suggested-search li {
   padding: 10px;
-  margin: 0; /* Remover margem para evitar recuo */
-  border-bottom: 1px solid #ddd; /* Adiciona uma separação entre os itens */
-  text-align: left; /* Garantir que o texto fique alinhado à esquerda */
+  border-bottom: 1px solid #ddd;
 }
 
 .suggested-search li a {
   cursor: pointer;
   color: black;
-  text-decoration: none; /* Remover sublinhado nos links */
+  text-decoration: none;
 }
 
 .suggested-search li:hover {
-  background-color: #f0f0f0; /* Destacar ao passar o mouse */
+  background-color: #f0f0f0;
 }
 
 /* 🌟 Responsividade */
-@media (max-width: 480px) {
-  .nav h1 a {
-    font-size: 18px;
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
   }
 
   .nav-search input {
     font-size: 14px;
+    padding: 8px;
+  }
+
+  .nav-search button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 14px;
+  }
+
+  .navbar-toggler {
+    border-color: teal;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 12px;
+  }
+
+  .nav-search input {
+    font-size: 12px;
     padding: 6px;
   }
 
   .nav-search button {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .suggested-search {
-    font-size: 14px;
+    font-size: 12px;
+    padding: 6px;
   }
 }

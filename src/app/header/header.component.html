@@ -1,97 +1,95 @@
 <header>
-  <nav class="nav">
-    <h1>
-      <a routerLink="/" class="text-decoration-none">
-        🖊️ Canetas Personalizadas
-      </a>
-    </h1>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
+  >
+    <div class="container-fluid">
+      <h1 class="navbar-brand">
+        <a routerLink="/" class="text-decoration-none text-teal">
+          🖊️ Canetas Personalizadas
+        </a>
+      </h1>
 
-    <div *ngIf="menuType === 'default'" class="nav-search">
-      <input
-        type="text"
-        [(ngModel)]="searchTerm"
-        (ngModelChange)="searchProducts(searchTerm)"
-        (blur)="hideSearch()"
-        class="form-control"
-        placeholder="🔍 Pesquisar Canetas..."
-      />
+      <!-- Botão de navegação para dispositivos móveis -->
       <button
-        class="btn btn-outline-primary"
-        (click)="submitSearch(searchTerm)"
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        Pesquisar
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <ul class="suggested-search" *ngIf="searchResult.length > 0">
-        <li *ngFor="let item of searchResult">
-          <a (mousedown)="redirectToDetails(item.id)"> {{ item.name }} </a>
-        </li>
-      </ul>
-    </div>
 
-    <div [ngSwitch]="menuType">
-      <!-- Menu para Visitantes -->
-      <ul *ngSwitchCase="'default'" class="nav-links">
-        <li>
-          <a routerLink="/" class="nav-link btn btn-outline-primary">🏠 Home</a>
-        </li>
-        <li>
-          <a routerLink="seller-auth" class="nav-link btn btn-outline-primary"
-            >🛍️ Área do Vendedor</a
-          >
-        </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="d-flex ms-auto">
+          <div *ngIf="menuType === 'default'" class="nav-search">
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="searchProducts(searchTerm)"
+              (blur)="hideSearch()"
+              class="form-control"
+              placeholder="🔍 Pesquisar Canetas..."
+            />
+            <button
+              class="btn btn-outline-primary"
+              (click)="submitSearch(searchTerm)"
+            >
+              Pesquisar
+            </button>
+            <ul class="suggested-search" *ngIf="searchResult.length > 0">
+              <li *ngFor="let item of searchResult">
+                <a (mousedown)="redirectToDetails(item.id)">
+                  {{ item.name }}
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        <!-- Se o usuário estiver logado, exibe o nome e o botão de logout -->
-        <li *ngIf="userName">
-          <span class="nav-link btn btn-outline-success"
-            >👤 {{ userName | titlecase }}</span
-          >
-        </li>
-        <li *ngIf="userName">
-          <a (click)="logout()" class="nav-link btn btn-outline-danger"
-            >🚪 Sair</a
-          >
-        </li>
+          <!-- Links de navegação -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a routerLink="/" class="nav-link btn btn-outline-primary"
+                >🏠 Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                routerLink="seller-auth"
+                class="nav-link btn btn-outline-primary"
+                >🛍️ Área do Vendedor</a
+              >
+            </li>
 
-        <!-- Se não estiver logado, exibe Login/Cadastrar -->
-        <li *ngIf="!userName">
-          <a routerLink="/user-auth" class="nav-link btn btn-outline-primary"
-            >🔑 Login/Cadastrar</a
-          >
-        </li>
+            <li *ngIf="userName" class="nav-item">
+              <span class="nav-link btn btn-outline-success"
+                >👤 {{ userName | titlecase }}</span
+              >
+            </li>
+            <li *ngIf="userName" class="nav-item">
+              <a (click)="logout()" class="nav-link btn btn-outline-danger"
+                >🚪 Sair</a
+              >
+            </li>
 
-        <li>
-          <a routerLink="cart" class="nav-link btn btn-outline-primary"
-            >🛒 Carrinho ({{ (cartItems$ | async)?.length || 0 }})</a
-          >
-        </li>
-      </ul>
+            <li *ngIf="!userName" class="nav-item">
+              <a
+                routerLink="/user-auth"
+                class="nav-link btn btn-outline-primary"
+                >🔑 Login/Cadastrar</a
+              >
+            </li>
 
-      <!-- Menu para Vendedores -->
-      <ul *ngSwitchCase="'seller'" class="nav-links">
-        <li>
-          <a
-            routerLink="seller-add-product"
-            class="nav-link btn btn-outline-primary"
-            >➕ Adicionar Caneta</a
-          >
-        </li>
-        <li>
-          <a routerLink="seller-home" class="nav-link btn btn-outline-primary"
-            >📋 Lista de Canetas</a
-          >
-        </li>
-
-        <li *ngIf="sellerName">
-          <span class="nav-link btn btn-outline-success"
-            >👤 {{ sellerName | titlecase }}</span
-          >
-        </li>
-        <li>
-          <a (click)="logout()" class="nav-link btn btn-outline-danger"
-            >🚪 Sair</a
-          >
-        </li>
-      </ul>
+            <li class="nav-item">
+              <a routerLink="cart" class="nav-link btn btn-outline-primary">
+                🛒 Carrinho ({{ (cartItems$ | async)?.length || 0 }})
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </nav>
 </header>
