@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  PLATFORM_ID,
+  Inject,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../services/product.service';
@@ -17,121 +24,90 @@ import { Observable } from 'rxjs';
   imports: [RouterModule, CommonModule, FormsModule],
 })
 export class HeaderComponent implements OnInit {
-  menuType: string = 'default'; // Tipo de menu (padrão ou vendedor)
-  sellerName: string = ''; // Nome do vendedor logado
-  userName: string = ''; // Nome do usuário logado
-  searchTerm: string = ''; // Termo de pesquisa
-  searchResult: product[] = []; // Lista de sugestões de pesquisa
-  cartItems$: Observable<product[]> = new Observable(); // 🔄 Inicializado corretamente
+  menuType: string = 'default';
+  sellerName: string = '';
+  userName: string = '';
+  searchTerm: string = '';
+  searchResult: product[] = [];
+  cartItems$: Observable<product[]> = new Observable();
   navbarCollapse: HTMLElement | null = null;
 
   constructor(
     private route: Router,
     private productService: ProductService,
-    private cdRef: ChangeDetectorRef, // Injeta o serviço de detecção de mudanças
+    private cdRef: ChangeDetectorRef,
     private userService: UserService,
-    private cartService: CartService
+    private cartService: CartService,
+    @Inject(PLATFORM_ID) private platformId: Object // Injetando o identificador da plataforma
   ) {}
 
   ngOnInit(): void {
-    this.navbarCollapse = document.getElementById('navbarNav');
-    this.cartItems$ = this.cartService.cartItems$;
-
-    // Monitora mudanças na rota para definir o menu correto
-    this.route.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.toggleMenu(false); // Fecha o menu após a navegação
-        this.updateMenuType(event.url);
-        this.checkLoginStatus(); // Garante que o login seja checado sempre que a rota mudar
-      }
-    });
-
-    this.checkLoginStatus(); // Verifica se há um usuário ou vendedor logado
+    if (isPlatformBrowser(this.platformId)) {
+      this.navbarCollapse = document.getElementById('navbarNav');
+      this.cartItems$ = this.cartService.cartItems$;
+      this.route.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.toggleMenu(false);
+          this.updateMenuType(event.url);
+          this.checkLoginStatus();
+        }
+      });
+      this.checkLoginStatus();
+    }
   }
 
   toggleMenu(state: boolean): void {
-    const navbarCollapse = document.getElementById('navbarNav');
-    if (navbarCollapse) {
-      if (state) {
-        navbarCollapse.classList.add('show'); // Abre o menu
-      } else {
-        navbarCollapse.classList.remove('show'); // Fecha o menu
-      }
+    if (this.navbarCollapse) {
+      this.navbarCollapse.classList.toggle('show', state);
     }
   }
 
   onMenuClick() {
-    const navbarCollapse = document.getElementById('navbarNav');
-    if (navbarCollapse) {
-      navbarCollapse.classList.toggle('show');
+    if (this.navbarCollapse) {
+      this.navbarCollapse.classList.toggle('show');
     }
   }
 
-  // Adiciona a função de fechar o menu após a navegação
   closeMenuAfterNavigation() {
-    const navbarCollapse = document.getElementById('navbarNav');
-    if (navbarCollapse) {
-      navbarCollapse.classList.remove('show');
+    if (this.navbarCollapse) {
+      this.navbarCollapse.classList.remove('show');
     }
   }
 
-  // Verifica se o usuário ou vendedor está logado
   checkLoginStatus(): void {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       const sellerStore = localStorage.getItem('seller');
       const userStore = localStorage.getItem('user');
 
-      console.log('Verificando status de login...');
-      console.log('Dados do vendedor:', sellerStore);
-      console.log('Dados do usuário:', userStore);
-
-      if (sellerStore) {
-        let sellerData = JSON.parse(sellerStore);
-        this.sellerName =
-          Array.isArray(sellerData) && sellerData.length > 0
-            ? sellerData[0].name
-            : '';
-      } else {
-        this.sellerName = '';
-      }
-
-      if (userStore) {
-        let userData = JSON.parse(userStore);
-        this.userName = userData.name || '';
-      } else {
-        this.userName = '';
-      }
-
-      this.cdRef.detectChanges(); // Força a atualização do UI imediatamente
+      this.sellerName = sellerStore
+        ? JSON.parse(sellerStore)[0]?.name || ''
+        : '';
+      this.userName = userStore ? JSON.parse(userStore).name || '' : '';
+      this.cdRef.detectChanges();
     }
   }
 
-  // Define o menu com base na URL
   updateMenuType(url: string): void {
     this.menuType = url.includes('seller') ? 'seller' : 'default';
   }
 
-  // Realiza login do usuário
   login(user: any): void {
-    console.log('Realizando login para o usuário:', user); // Log de login
-
-    // Supondo que você tenha um serviço que faz login e retorna as informações do usuário
-    localStorage.setItem('user', JSON.stringify(user)); // Salva as informações do usuário no localStorage
-    this.userName = user.name; // Atualiza o nome do usuário
-    this.checkLoginStatus(); // Atualiza o status do login
-    this.route.navigate(['/']); // Redireciona para a home após o login
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('user', JSON.stringify(user));
+      this.userName = user.name;
+      this.checkLoginStatus();
+      this.route.navigate(['/']);
+    }
   }
 
   logout(): void {
-    console.log('Realizando logout...');
-    this.userService.logout(); // Agora usamos o userService para chamar a função de logout
-    this.sellerName = ''; // Limpa o nome do vendedor
-    this.userName = ''; // Limpa o nome do usuário
-    this.menuType = 'default'; // Reseta o menu para o estado de visitante
-    this.cdRef.detectChanges(); // Força a atualização do UI após logout
+    this.userService.logout();
+    this.sellerName = '';
+    this.userName = '';
+    this.menuType = 'default';
+    this.cdRef.detectChanges();
   }
 
-  // Função de pesquisa de produtos
   searchProducts(query: string): void {
     if (query.trim()) {
       this.productService.searchProducts(query).subscribe((result) => {
@@ -144,14 +120,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // Esconde a lista de pesquisa ao perder o foco
   hideSearch(): void {
     setTimeout(() => {
       this.searchResult = [];
     }, 200);
   }
 
-  // Realiza a pesquisa e redireciona para a página de resultados
   submitSearch(val: string): void {
     if (val) {
       this.route.navigate([`search/${val}`]);
@@ -159,7 +133,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // Redireciona para os detalhes do produto
   redirectToDetails(id: number) {
     this.searchResult = [];
     this.route.navigate(['/details/', id]);

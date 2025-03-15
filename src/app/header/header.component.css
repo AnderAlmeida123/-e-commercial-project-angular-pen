@@ -7,10 +7,26 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo do header */
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1400px; /* Defina um limite de largura para o conteúdo */
+  padding: 0 20px; /* Espaçamento nas laterais */
 }
 
 .navbar {
-  padding: 10px 20px;
+  max-width: 1400px; /* Define um limite de largura para o menu */
+  width: 100%;
+  margin: 0 auto; /* Centraliza o header na tela */
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* Garante que o container dentro do header também siga a largura máxima */
+.container-fluid {
+  max-width: 1400px; /* Mantém o conteúdo alinhado */
 }
 
 .navbar-brand {

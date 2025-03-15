@@ -2,8 +2,15 @@
 .footer {
   background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
   color: white;
-  padding: 40px 0;
   text-align: center;
+  width: 100%; /* Garantindo que ocupe toda a largura da tela */
+  position: relative; /* Não fixa o footer na tela */
+  margin: 0; /* Remove qualquer margem */
+  padding: 10px 0; /* Padding para o conteúdo do footer */
+  min-height: 50px; /* Altura mínima para o footer */
+  box-sizing: border-box; /* Garante que o padding e as bordas não adicionem largura extra */
+  left: 0; /* Remove qualquer espaço lateral */
+  right: 0; /* Remove qualquer espaço lateral */
 }
 
 /* Links no footer */
@@ -41,7 +48,6 @@
 @media (max-width: 768px) {
   /* Reduzindo o padding do footer em telas menores */
   .footer {
-    position: relative;
     padding: 10px 0;
     font-size: 0.9rem; /* Reduzindo o tamanho da fonte para telas pequenas */
   }

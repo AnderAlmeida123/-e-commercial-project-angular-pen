@@ -22,13 +22,18 @@ export class UserService {
   ) {}
 
   private getUserFromStorage() {
+    console.log('Tentando obter usuário do localStorage...');
     try {
       if (
         typeof window !== 'undefined' &&
         typeof window.localStorage !== 'undefined'
       ) {
-        return JSON.parse(localStorage.getItem('user') || 'null');
+        const user = localStorage.getItem('user');
+        console.log('Usuário encontrado no localStorage:', user);
+
+        return JSON.parse(user || 'null');
       }
+      console.log('window ou localStorage não disponível, retornando null.');
       return null; // Se não estiver no navegador, retorna null
     } catch (error) {
       console.warn('Erro ao recuperar usuário do localStorage:', error);
@@ -53,7 +58,9 @@ export class UserService {
       .subscribe((result) => {
         if (result && result.body) {
           const { password, ...userWithoutPassword } = result.body as signUp;
-          localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+          }
           this.isLoggedInSubject.next(true); // Atualiza o estado de login
           this.router.navigate(['/']);
         }
@@ -76,19 +83,19 @@ export class UserService {
       .subscribe({
         next: (result) => {
           if (result.body && result.body.length > 0) {
-            const user = result.body.find((u) => u.password === data.password);
+            const user = result.body[0]; // Seleciona o primeiro usuário, já que deve ser único
 
-            if (!user) {
-              console.warn('Senha incorreta.');
-              return;
+            if (user) {
+              const { password, ...userWithoutPassword } = user;
+              if (isPlatformBrowser(this.platformId)) {
+                localStorage.setItem(
+                  'user',
+                  JSON.stringify(userWithoutPassword)
+                );
+              }
+              this.isLoggedInSubject.next(true);
+              this.router.navigate(['/']);
             }
-
-            const { password, ...userWithoutPassword } = user;
-            if (isPlatformBrowser(this.platformId)) {
-              localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-            }
-            this.isLoggedInSubject.next(true);
-            this.router.navigate(['/']);
           } else {
             console.warn('Usuário não encontrado.');
           }

@@ -1,16 +1,16 @@
 {
   "seller": [
     {
-      "name": "ander",
-      "password": "ander@ander",
-      "email": "1234",
+      "name": "",
+      "password": "12345678",
+      "email": "vendedor@teste.com",
       "id": "1"
     },
     {
       "id": "050f",
-      "name": "ander",
-      "password": "123",
-      "email": "ander@ander"
+      "name": "vendedor2",
+      "password": "12345678",
+      "email": "vendedor2@teste.com"
     }
   ],
   "products": [
@@ -81,20 +81,20 @@
   "users": [
     {
       "id": "3325",
-      "name": "raft",
-      "email": "ander@123",
-      "password": "123"
+      "name": "user",
+      "email": "user@teste.com",
+      "password": "12345678"
     },
     {
       "id": "8afa",
-      "name": "raft",
-      "email": "raft@raft",
-      "password": "123"
+      "name": "user2",
+      "email": "user2@teste.com",
+      "password": "12345678"
     },
     {
       "id": "db674b28-248f-47da-9170-4089116aff9a",
-      "name": "raft",
-      "email": "raft@hotmail.com",
+      "name": "user3",
+      "email": "user3@teste.com",
       "password": "12345678"
     }
   ]

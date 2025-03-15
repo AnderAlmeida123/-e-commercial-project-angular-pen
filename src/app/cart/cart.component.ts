@@ -19,21 +19,31 @@ export class CartComponent implements OnInit {
     this.loadCart();
   }
 
-  // Carregar o carrinho (verificando se localStorage está disponível)
   loadCart(): void {
+    console.log('Verificando se o localStorage está disponível...');
     if (
       typeof window !== 'undefined' &&
       typeof window.localStorage !== 'undefined'
     ) {
       try {
-        this.cartItems = this.cartService.getCart(); // Obter os itens do carrinho
+        console.log(
+          'localStorage disponível, tentando obter os itens do carrinho...'
+        );
+        const cart = this.cartService.getCart(); // Obter os itens do carrinho
+        console.log('Itens do carrinho recuperados:', cart);
+
+        // Garantir que cart seja um array válido
+        this.cartItems = Array.isArray(cart) ? cart : [];
+        console.log('Itens do carrinho após validação:', this.cartItems);
       } catch (error) {
         console.warn('Erro ao carregar os itens do carrinho:', error);
-        this.cartItems = []; // Retorna um carrinho vazio se ocorrer erro
+        this.cartItems = []; // Carrinho vazio em caso de erro
+        console.log('Carrinho vazio após erro.');
       }
     } else {
       console.warn('localStorage não disponível no servidor.');
       this.cartItems = []; // Carrinho vazio se localStorage não estiver disponível
+      console.log('Carrinho vazio devido à indisponibilidade do localStorage.');
     }
   }
 

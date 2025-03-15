@@ -84,6 +84,10 @@ export class UserAuthComponent implements OnInit {
 
   // Função para verificar se estamos no ambiente de navegador
   isBrowser(): boolean {
+    console.log('Verificando se estamos no navegador...');
+    console.log('Tipo de window:', typeof window);
+    console.log('Tipo de localStorage:', typeof window?.localStorage);
+
     return (
       typeof window !== 'undefined' &&
       typeof window.localStorage !== 'undefined'
